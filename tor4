@@ -1,0 +1,16 @@
+import requests
+
+def get_bitcoin_address_info(address):
+    url = f"https://api.blockcypher.com/v1/btc/main/addrs/{address}"
+    response = requests.get(url)
+    data = response.json()
+
+    print(f"Address: {data['address']}")
+    print(f"Balance: {data['balance']}")
+    print(f"Transactions: {len(data['txrefs'])}")
+    
+    for tx in data['txrefs']:
+        print(f"Transaction: {tx['tx_hash']}, Value: {tx['value']} Satoshi")
+
+# Example Bitcoin address
+get_bitcoin_address_info('1BoatSLRHtKNngkdXEeobR76b53LETtpyT')
